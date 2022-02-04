@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus, FiCalendar, FiEdit2, FiTrash } from 'react-icons/fi';
 
 import styles from './styles.module.scss';
 
@@ -22,6 +22,31 @@ export default function Board() {
             />
           </button>
         </form>
+
+        <h1>Você tem 2 tarefas!</h1>
+
+        <section>
+          <article className={styles.taskList}>
+            <p>Aprender criar projetos usando Next JS e aplicando firebase como back.</p>
+            <div className={styles.actions}>
+              <div>
+                <div>
+                  <FiCalendar size={20} color="#ffb800" />
+                  <time>04 Fevereiro 2022</time>
+                </div>
+                <button>
+                  <FiEdit2 size={20} color="#fff" />
+                  <span>Editar</span>
+                </button>
+              </div>
+
+              <button>
+                <FiTrash size={20} color="#ff3636" />
+                <span>Excluir</span>
+              </button>
+            </div>
+          </article>
+        </section>
       </main>
     </>
   )
