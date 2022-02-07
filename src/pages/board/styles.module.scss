@@ -36,4 +36,67 @@
       }
     }
   }
+
+  h1 {
+    color: #fff;
+    margin-top: 1.8rem;
+  }
+}
+
+.taskList {
+  background-color: #20212c;
+  margin: 1rem 0;
+  padding: 0.7rem;
+  border-radius: 6px;
+
+  p {
+    cursor: pointer;
+    color: #f2f6fc;
+    font-size: 1rem;
+    line-height: 150%;
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      time {
+        color: #ffb800;
+        margin-left: 5px;
+        margin-right: 1rem;
+      }
+    }
+
+    button {
+      background: transparent;
+      border: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transition: 0.2s;
+
+      & + button {
+        margin-left: 10px;
+      }
+
+      span {
+        margin-left: 5px;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      span:hover {
+        filter: brightness(0.9);
+      }
+    }
+  }
 }
