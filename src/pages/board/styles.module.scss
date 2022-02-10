@@ -100,3 +100,28 @@
     }
   }
 }
+
+.vipContainer {
+  max-width: 1120px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: #17181f;
+  border-radius: 6px;
+
+  h3 {
+    color: #ffb800;
+    font-size: 2rem;
+  }
+
+  div {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+
+    time {
+      color: #fff;
+      font-size: 1.4rem;
+      padding: 10px;
+    }
+  }
+}
