@@ -13,8 +13,8 @@ export function SignInButton() {
       className={styles.signInButton}
       onClick={() => signOut()}
     >
-      <img src='https://avatars.githubusercontent.com/u/77689659?v=4' alt='avatar' />
-      Olá Robson
+      <img src={session.user.image} alt='avatar' />
+      Olá {session.user.name}
       <FiX 
         color='#737380'
         className={styles.closeIcon} 
