@@ -1,3 +1,4 @@
+import { useState, FormEvent } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 
@@ -7,17 +8,34 @@ import { SupportButton } from '../../components/SupportButton';
 
 import styles from './styles.module.scss';
 
-export default function Board() {
+interface BoardProps {
+  user: {
+    id: string;
+    name: string;
+  }
+}
+
+export default function Board({ user }: BoardProps) {
+  const [input, setInput] = useState('');
+
+  function handleAddTask(event: FormEvent) {
+    event.preventDefault();
+    
+    alert('TESTE')
+  }
+
   return (
     <>
       <Head>
         <title>Minhas tarefas - Board</title>
       </Head>
       <main className={styles.container}>
-        <form>
+        <form onSubmit={handleAddTask}>
           <input 
             type="text"
             placeholder='Digite sua tarefa...'
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
           />
           <button type="submit">
             <FiPlus 
@@ -81,11 +99,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     }
   }
 
-  console.log(session.user);
+  const user = {
+    name: session?.user.name,
+    id: session?.id
+  }
 
   return {
     props: {
-
+      user
     }
   }
 }
