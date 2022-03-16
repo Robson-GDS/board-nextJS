@@ -1,10 +1,11 @@
 import { useState, FormEvent } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock } from 'react-icons/fi';
 
 import Head from 'next/head';
-import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock } from 'react-icons/fi';
 import { SupportButton } from '../../components/SupportButton';
+import firebase from '../../services/firebaseConnection';
 
 import styles from './styles.module.scss';
 
@@ -18,10 +19,27 @@ interface BoardProps {
 export default function Board({ user }: BoardProps) {
   const [input, setInput] = useState('');
 
-  function handleAddTask(event: FormEvent) {
+  async function handleAddTask(event: FormEvent) {
     event.preventDefault();
-    
-    alert('TESTE')
+
+    if(input === '') {
+      alert("Preencha alguma tarefa!")
+      return;
+    }
+
+    await firebase.firestore().collection('tarefas')
+    .add({
+      created: new Date(),
+      tarefa: input,
+      userId: user.id,
+      name: user.name
+    })
+    .then((doc) => {
+      console.log("Cadastrado Com Sucesso!")
+    })
+    .catch((err) => {
+      console.log("Erro ao cadastrar: ",err)
+    })
   }
 
   return (
