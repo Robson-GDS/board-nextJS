@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock } from 'react-icons/fi';
+import { format } from 'date-fns';
 
 import Head from 'next/head';
 import { SupportButton } from '../../components/SupportButton';
@@ -40,6 +41,7 @@ export default function Board({ user }: BoardProps) {
       let data = {
         id: doc.id,
         created: new Date(),
+        createdFormated: format(new Date(), 'dd MMMM yyyy'),
         tarefa: input,
         userId: user.id,
         name: user.name
