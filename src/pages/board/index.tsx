@@ -18,6 +18,7 @@ interface BoardProps {
 
 export default function Board({ user }: BoardProps) {
   const [input, setInput] = useState('');
+  const [tasklist, setTasklist] = useState([]);
 
   async function handleAddTask(event: FormEvent) {
     event.preventDefault();
@@ -35,7 +36,14 @@ export default function Board({ user }: BoardProps) {
       name: user.name
     })
     .then((doc) => {
-      console.log("Cadastrado Com Sucesso!")
+      console.log("Cadastrado Com Sucesso!");
+      let data = {
+        id: doc.id,
+        created: new Date(),
+        tarefa: input,
+        userId: user.id,
+        name: user.name
+      }
     })
     .catch((err) => {
       console.log("Erro ao cadastrar: ",err)
