@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState, FormEvent } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
@@ -49,7 +50,7 @@ export default function Board({ user }: BoardProps) {
 
       setTasklist([...tasklist, data]);
       setInput('');
-      
+
     })
     .catch((err) => {
       console.log("Erro ao cadastrar: ",err)
@@ -80,26 +81,30 @@ export default function Board({ user }: BoardProps) {
         <h1>Você tem 2 tarefas!</h1>
 
         <section>
-          <article className={styles.taskList}>
-            <p>Aprender criar projetos usando Next JS e aplicando firebase como back.</p>
-            <div className={styles.actions}>
-              <div>
+          {tasklist.map( task => (
+            <article className={styles.taskList}>
+              <Link href="/board/123">
+                <p>{task.tarefa}</p>
+              </Link>
+              <div className={styles.actions}>
                 <div>
-                  <FiCalendar size={20} color="#ffb800" />
-                  <time>04 Fevereiro 2022</time>
+                  <div>
+                    <FiCalendar size={20} color="#ffb800" />
+                    <time>{task.createdFormated}</time>
+                  </div>
+                  <button>
+                    <FiEdit2 size={20} color="#fff" />
+                    <span>Editar</span>
+                  </button>
                 </div>
+
                 <button>
-                  <FiEdit2 size={20} color="#fff" />
-                  <span>Editar</span>
+                  <FiTrash size={20} color="#ff3636" />
+                  <span>Excluir</span>
                 </button>
               </div>
-
-              <button>
-                <FiTrash size={20} color="#ff3636" />
-                <span>Excluir</span>
-              </button>
-            </div>
-          </article>
+            </article>
+          ))}
         </section>
       </main>
 
