@@ -45,7 +45,11 @@ export default function Board({ user }: BoardProps) {
         tarefa: input,
         userId: user.id,
         name: user.name
-      }
+      };
+
+      setTasklist([...tasklist, data]);
+      setInput('');
+      
     })
     .catch((err) => {
       console.log("Erro ao cadastrar: ",err)
