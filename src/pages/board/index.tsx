@@ -83,7 +83,7 @@ export default function Board({ user }: BoardProps) {
         <section>
           {tasklist.map( task => (
             <article className={styles.taskList}>
-              <Link href="/board/123">
+              <Link href={`/board/${task.id}`}>
                 <p>{task.tarefa}</p>
               </Link>
               <div className={styles.actions}>
