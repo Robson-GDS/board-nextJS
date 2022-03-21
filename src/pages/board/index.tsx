@@ -136,6 +136,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     }
   }
 
+  const tasks = await firebase.firestore().collection('tarefas').orderBy('created', 'asc').get();
+
+  const data = tasks.docs.map( u => {
+    return {
+      id: u.id,
+      createdFormated: format(u.data().created.toDate(), 'dd MMMM yyyy'),
+      ...u.data(),
+    }
+  })
+
+  console.log(data)
+
   const user = {
     name: session?.user.name,
     id: session?.id
