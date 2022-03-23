@@ -11,16 +11,26 @@ import firebase from '../../services/firebaseConnection';
 
 import styles from './styles.module.scss';
 
+interface TaskList {
+  id: string;
+  created: string | Date;
+  createdFormated?: string;
+  tarefa: string;
+  userID: string;
+  nome: string; 
+}
+
 interface BoardProps {
   user: {
     id: string;
     name: string;
   }
+  data: string;
 }
 
-export default function Board({ user }: BoardProps) {
+export default function Board({ user, data }: BoardProps) {
   const [input, setInput] = useState('');
-  const [tasklist, setTasklist] = useState([]);
+  const [tasklist, setTasklist] = useState<TaskList[]>(JSON.parse(data));
 
   async function handleAddTask(event: FormEvent) {
     event.preventDefault();
@@ -138,15 +148,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   const tasks = await firebase.firestore().collection('tarefas').orderBy('created', 'asc').get();
 
-  const data = tasks.docs.map( u => {
+  const data = JSON.stringify(tasks.docs.map( u => {
     return {
       id: u.id,
       createdFormated: format(u.data().created.toDate(), 'dd MMMM yyyy'),
       ...u.data(),
     }
-  })
-
-  console.log(data)
+  }))
 
   const user = {
     name: session?.user.name,
@@ -155,7 +163,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   return {
     props: {
-      user
+      user,
+      data
     }
   }
 }
