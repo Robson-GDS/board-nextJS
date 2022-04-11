@@ -88,7 +88,7 @@ export default function Board({ user, data }: BoardProps) {
           </button>
         </form>
 
-        <h1>Você tem {tasklist.length} tarefas!</h1>
+        <h1>Você tem {tasklist.length} {tasklist.length === 1 ? 'Tarefa' : 'Tarefas'}!</h1>
 
         <section>
           {tasklist.map( task => (
