@@ -71,7 +71,11 @@ export default function Board({ user, data }: BoardProps) {
     await firebase.firestore().collection('tarefas').doc(id)
     .delete()
     .then(() => {
-      console.log('Deletado com sucesso!')
+      let taskDeleted = tasklist.filter( item => {
+        return (item.id !== id)
+      });
+
+      setTasklist(taskDeleted);
     })
     .catch((err) => {
       console.log(err);
@@ -103,7 +107,7 @@ export default function Board({ user, data }: BoardProps) {
 
         <section>
           {tasklist.map( task => (
-            <article className={styles.taskList}>
+            <article  key={task.id} className={styles.taskList}>
               <Link href={`/board/${task.id}`}>
                 <p>{task.tarefa}</p>
               </Link>
