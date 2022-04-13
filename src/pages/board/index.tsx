@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, FormEvent } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
-import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock } from 'react-icons/fi';
+import { FiPlus, FiCalendar, FiEdit2, FiTrash, FiClock, FiX } from 'react-icons/fi';
 import { format } from 'date-fns';
 
 import Head from 'next/head';
@@ -31,6 +31,9 @@ interface BoardProps {
 export default function Board({ user, data }: BoardProps) {
   const [input, setInput] = useState('');
   const [tasklist, setTasklist] = useState<TaskList[]>(JSON.parse(data));
+
+
+  const [taskEdit, setTaskEdit] = useState<TaskList | null>(null)
 
   async function handleAddTask(event: FormEvent) {
     event.preventDefault();
@@ -83,7 +86,8 @@ export default function Board({ user, data }: BoardProps) {
   }
 
   function handleEditTask(task: TaskList) {
-    setInput(task.tarefa)
+    setTaskEdit(task);
+    setInput(task.tarefa);
   }
 
   return (
@@ -92,6 +96,16 @@ export default function Board({ user, data }: BoardProps) {
         <title>Minhas tarefas - Board</title>
       </Head>
       <main className={styles.container}>
+
+        {taskEdit && (
+          <span>
+            <button>
+              <FiX size={30} color="#ff3636"/>
+            </button>
+            Você esta editando uma tarefa!
+          </span>
+        )}
+
         <form onSubmit={handleAddTask}>
           <input 
             type="text"
