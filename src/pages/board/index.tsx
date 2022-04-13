@@ -82,6 +82,10 @@ export default function Board({ user, data }: BoardProps) {
     })
   }
 
+  function handleEditTask(task: TaskList) {
+    alert('Teste')
+  }
+
   return (
     <>
       <Head>
@@ -117,7 +121,7 @@ export default function Board({ user, data }: BoardProps) {
                     <FiCalendar size={20} color="#ffb800" />
                     <time>{task.createdFormated}</time>
                   </div>
-                  <button>
+                  <button onClick={ () => handleEditTask(task)}>
                     <FiEdit2 size={20} color="#fff" />
                     <span>Editar</span>
                   </button>
