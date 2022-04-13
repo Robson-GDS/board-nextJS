@@ -83,7 +83,7 @@ export default function Board({ user, data }: BoardProps) {
   }
 
   function handleEditTask(task: TaskList) {
-    alert('Teste')
+    setInput(task.tarefa)
   }
 
   return (
