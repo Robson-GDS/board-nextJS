@@ -98,7 +98,7 @@ export default function Board({ user, data }: BoardProps) {
       <main className={styles.container}>
 
         {taskEdit && (
-          <span>
+          <span className={styles.warnText}>
             <button>
               <FiX size={30} color="#ff3636"/>
             </button>
