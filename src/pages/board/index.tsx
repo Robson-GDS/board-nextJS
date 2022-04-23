@@ -90,6 +90,11 @@ export default function Board({ user, data }: BoardProps) {
     setInput(task.tarefa);
   }
 
+  function handleCancelEdit() {
+    setInput('');
+    setTaskEdit(null);
+  }
+
   return (
     <>
       <Head>
@@ -99,7 +104,7 @@ export default function Board({ user, data }: BoardProps) {
 
         {taskEdit && (
           <span className={styles.warnText}>
-            <button>
+            <button onClick={handleCancelEdit}>
               <FiX size={30} color="#ff3636"/>
             </button>
             Você esta editando uma tarefa!
