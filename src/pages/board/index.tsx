@@ -43,6 +43,19 @@ export default function Board({ user, data }: BoardProps) {
       return;
     }
 
+    if(taskEdit) {
+      await firebase.firestore().collection('tarefas')
+      .doc(taskEdit.id)
+      .update({
+        tarefa: input
+      })
+      .then(() => {
+
+      })
+
+      return;
+    }
+
     await firebase.firestore().collection('tarefas')
     .add({
       created: new Date(),
