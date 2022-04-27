@@ -50,7 +50,13 @@ export default function Board({ user, data }: BoardProps) {
         tarefa: input
       })
       .then(() => {
+        let data = tasklist;
+        let taskIndex = tasklist.findIndex(item => item.id === taskEdit.id);
+        data[taskIndex].tarefa = input
 
+        setTasklist(data);
+        setTaskEdit(null);
+        setInput('');
       })
 
       return;
