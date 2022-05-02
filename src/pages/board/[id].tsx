@@ -4,7 +4,20 @@ import { format } from "date-fns";
 
 import firebase from "../../services/firebaseConnection";
 
-export default function Task({ data }) {
+type Task = {
+  id: string;
+  created: string | Date;
+  createdFormated?: string;
+  tarefa: string;
+  userId: string;
+  nome: string;
+}
+
+interface TaskListProps {
+  data: string;
+}
+
+export default function Task({ data }: TaskListProps) {
   return (
     <div>
       <h1>Pagina detalhes</h1>
