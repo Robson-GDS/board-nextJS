@@ -18,9 +18,12 @@ interface TaskListProps {
 }
 
 export default function Task({ data }: TaskListProps) {
+  const task = JSON.parse(data) as Task;
+
   return (
     <div>
       <h1>Pagina detalhes</h1>
+      <h2>{task.tarefa}</h2>
     </div>
   )
 }
@@ -45,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
     const data = {
       id: snapshot.id,
       created: snapshot.data().created,
-      createdFormated: format(snapshot.data().created.toDate, 'dd MMMM yyyy'),
+      createdFormated: format(snapshot.data().created.toDate(), 'dd MMMM yyyy'),
       tarefa: snapshot.data().tarefa,
       userId: snapshot.data().userId,
       nome: snapshot.data().nome
