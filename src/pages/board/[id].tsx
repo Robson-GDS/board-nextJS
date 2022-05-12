@@ -29,8 +29,8 @@ export default function Task({ data }: TaskListProps) {
       <Head>
         <title>Detalhes da sua tarefa</title>
       </Head>
-      <article>
-        <div>
+      <article className={styles.container}>
+        <div className={styles.actions}>
           <div>
             <FiCalendar size={30} color="#fff" />
             <span>Tarefa criada:</span>
