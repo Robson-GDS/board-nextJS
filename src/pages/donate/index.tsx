@@ -11,6 +11,11 @@ export default function Donate() {
       <main className={styles.container}>
         <img src="/images/rocket.svg" alt="Seja Apoiador" />
 
+        <div className={styles.vip}>
+          <img src="https://avatars.githubusercontent.com/u/77689659?v=4" alt="" />
+          <span>Parabéns você é um novo apoiador!</span>
+        </div>
+
         <h1>Seja um apoiador desete projeto</h1>
         <h3>Contribua com apenas <span>R$ 1,00</span></h3>
         <strong>Apareça na nossa home, tenha funcionalidades exclusivas.</strong>
