@@ -4,7 +4,15 @@ import Head from "next/head";
 
 import styles from "./styles.module.scss";
 
-export default function Donate() {
+interface DonateProps {
+  user: {
+    nome: string;
+    id: string;
+    image: string;
+  }
+}
+
+export default function Donate({ user }: DonateProps) {
   return (
     <>
       <Head>
@@ -14,7 +22,7 @@ export default function Donate() {
         <img src="/images/rocket.svg" alt="Seja Apoiador" />
 
         <div className={styles.vip}>
-          <img src="https://avatars.githubusercontent.com/u/77689659?v=4" alt="" />
+          <img src={user.image} alt="Foto de perfil do usuario apoiador" />
           <span>Parabéns você é um novo apoiador!</span>
         </div>
 
