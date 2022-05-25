@@ -4,6 +4,8 @@ import Head from "next/head";
 
 import styles from "./styles.module.scss";
 
+// <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+
 interface DonateProps {
   user: {
     nome: string;
