@@ -3,6 +3,8 @@ import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { PayPalButtons } from '@paypal/react-paypal-js';
 
+import firebase from '../../services/firebaseConnection';
+
 import styles from "./styles.module.scss";
 
 // <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
@@ -16,6 +18,17 @@ interface DonateProps {
 }
 
 export default function Donate({ user }: DonateProps) {
+
+  async function handleSaveDonate() {
+    await firebase.firestore().collection('users')
+    .doc(user.id)
+    .set({
+        donate: true,
+        lastDonate: new Date(),
+        image: user.image
+      })
+  }
+
   return (
     <>
       <Head>
@@ -47,6 +60,7 @@ export default function Donate({ user }: DonateProps) {
           onApprove = {(data, actions) => {
             return actions.order.capture().then(function(details) {
               console.log('Compra aprovada: ' + details.payer.name.given_name);
+              handleSaveDonate();
             })
           }}
         />
