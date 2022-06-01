@@ -6,6 +6,7 @@ import { PayPalButtons } from '@paypal/react-paypal-js';
 import firebase from '../../services/firebaseConnection';
 
 import styles from "./styles.module.scss";
+import { useState } from "react";
 
 // <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
 
@@ -18,6 +19,7 @@ interface DonateProps {
 }
 
 export default function Donate({ user }: DonateProps) {
+  const [vip, setVip] = useState(false);
 
   async function handleSaveDonate() {
     await firebase.firestore().collection('users')
@@ -26,6 +28,9 @@ export default function Donate({ user }: DonateProps) {
         donate: true,
         lastDonate: new Date(),
         image: user.image
+      })
+      .then(() => {
+        setVip(true);
       })
   }
 
@@ -37,10 +42,12 @@ export default function Donate({ user }: DonateProps) {
       <main className={styles.container}>
         <img src="/images/rocket.svg" alt="Seja Apoiador" />
 
-        <div className={styles.vip}>
-          <img src={user.image} alt="Foto de perfil do usuario apoiador" />
-          <span>Parabéns você é um novo apoiador!</span>
-        </div>
+        {vip && (
+          <div className={styles.vip}>
+            <img src={user.image} alt="Foto de perfil do usuario apoiador" />
+            <span>Parabéns você é um novo apoiador!</span>
+          </div>
+        )}
 
         <h1>Seja um apoiador desete projeto</h1>
         <h3>Contribua com apenas <span>R$ 1,00</span></h3>
