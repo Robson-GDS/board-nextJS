@@ -36,6 +36,7 @@ export default function Home({ data }: HomeProps) {
           </p>
         </section>
 
+        {donaters.length !== 0 && <h3>Apoiadores: </h3>}
         <div className={styles.donaters}>
           {donaters.map(item => (
             <img key={item.image} src={item.image} alt='Usuario Doador' />
